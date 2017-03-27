@@ -1,0 +1,6 @@
+PassivePanga python passivepanga.py
+KaylorrCriterion python kaylorrcriterion.py
+MonisAddiction python monisaddiction.py
+Lurker python Lurker.py
+HeCKuSumer python heckusumer.py
+gunHeCK python gunHeCK.py

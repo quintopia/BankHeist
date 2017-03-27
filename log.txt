@@ -1,0 +1,267 @@
+#####GAME 0: 435 players######
+
+Round 1:
+MonisAddiction bet 69.
+HeCKuSumer bet 24.
+PassivePanga bet 69.
+Lurker bet 0.
+KaylorrCriterion bet 0.
+gunHeCK bet 0.
+
+Round 2
+MonisAddiction decided to !guncheck.
+HeCKuSumer decided to !guncheck.
+PassivePanga decided to !guncheck.
+
+Results:
+0. KaylorrCriterion: 720
+1. Lurker: 720
+2. gunHeCK: 720
+3. HeCKuSumer: 696
+4. PassivePanga: 651
+5. MonisAddiction: 651
+
+
+#####GAME 1: 251 players######
+
+Round 1:
+gunHeCK bet 0.
+HeCKuSumer bet 69.
+Lurker bet 0.
+PassivePanga bet 69.
+MonisAddiction bet 69.
+KaylorrCriterion bet 0.
+
+Round 2
+MonisAddiction decided to all in.
+PassivePanga decided to !guncheck.
+HeCKuSumer decided to !guncheck.
+
+Results:
+0. KaylorrCriterion: 1200
+1. Lurker: 1200
+2. gunHeCK: 1200
+3. HeCKuSumer: 1107
+4. PassivePanga: 1062
+5. MonisAddiction: 240
+
+
+#####GAME 2: 304 players######
+
+Round 1:
+Lurker bet 0.
+HeCKuSumer bet 110.
+MonisAddiction bet 69.
+PassivePanga bet 69.
+KaylorrCriterion bet 0.
+gunHeCK bet 0.
+
+Round 2
+HeCKuSumer decided to !guncheck.
+PassivePanga decided to !guncheck.
+MonisAddiction decided to all in.
+
+Results:
+0. KaylorrCriterion: 1680
+1. Lurker: 1680
+2. gunHeCK: 1680
+3. HeCKuSumer: 1477
+4. PassivePanga: 1473
+5. MonisAddiction: 240
+
+
+#####GAME 3: 258 players######
+
+Round 1:
+PassivePanga bet 69.
+Lurker bet 0.
+HeCKuSumer bet 147.
+MonisAddiction bet 69.
+KaylorrCriterion bet 0.
+gunHeCK bet 0.
+
+Round 2
+HeCKuSumer decided to !guncheck.
+PassivePanga decided to !guncheck.
+MonisAddiction decided to all in.
+
+Results:
+0. KaylorrCriterion: 2160
+1. Lurker: 2160
+2. gunHeCK: 2160
+3. PassivePanga: 1884
+4. HeCKuSumer: 1810
+5. MonisAddiction: 240
+
+
+#####GAME 4: 117 players######
+
+Round 1:
+KaylorrCriterion bet 0.
+Lurker bet 0.
+MonisAddiction bet 1.
+HeCKuSumer bet 181.
+PassivePanga bet 69.
+gunHeCK bet 33.
+
+Round 2
+gunHeCK decided to !gunHeCK.
+HeCKuSumer decided to !guncheck.
+MonisAddiction decided to all in.
+PassivePanga decided to !guncheck.
+
+Results:
+0. KaylorrCriterion: 2640
+1. Lurker: 2640
+2. gunHeCK: 2607
+3. PassivePanga: 2295
+4. HeCKuSumer: 2109
+5. MonisAddiction: 1032
+
+
+#####GAME 5: 27 players######
+
+Round 1:
+HeCKuSumer bet 210.
+KaylorrCriterion bet 0.
+MonisAddiction bet 69.
+Lurker bet 0.
+PassivePanga bet 69.
+gunHeCK bet 0.
+
+Round 2
+MonisAddiction decided to all in.
+PassivePanga decided to !guncheck.
+HeCKuSumer decided to !guncheck.
+
+Results:
+0. KaylorrCriterion: 3120
+1. Lurker: 3120
+2. gunHeCK: 3087
+3. PassivePanga: 2706
+4. HeCKuSumer: 2379
+5. MonisAddiction: 1257
+
+
+#####GAME 6: 475 players######
+
+Round 1:
+HeCKuSumer bet 237.
+PassivePanga bet 69.
+gunHeCK bet 0.
+MonisAddiction bet 69.
+KaylorrCriterion bet 0.
+Lurker bet 0.
+
+Round 2
+MonisAddiction decided to all in.
+PassivePanga decided to !guncheck.
+HeCKuSumer decided to !guncheck.
+
+Results:
+0. KaylorrCriterion: 3600
+1. Lurker: 3600
+2. gunHeCK: 3567
+3. MonisAddiction: 3159
+4. PassivePanga: 3117
+5. HeCKuSumer: 2622
+
+
+#####GAME 7: 299 players######
+
+Round 1:
+MonisAddiction bet 1.
+Lurker bet 0.
+HeCKuSumer bet 262.
+KaylorrCriterion bet 0.
+PassivePanga bet 69.
+gunHeCK bet 0.
+
+Round 2
+PassivePanga decided to !guncheck.
+MonisAddiction decided to all in.
+HeCKuSumer decided to !guncheck.
+
+Results:
+0. KaylorrCriterion: 4080
+1. Lurker: 4080
+2. gunHeCK: 4047
+3. PassivePanga: 3528
+4. HeCKuSumer: 2840
+5. MonisAddiction: 240
+
+
+#####GAME 8: 431 players######
+
+Round 1:
+KaylorrCriterion bet 0.
+HeCKuSumer bet 284.
+PassivePanga bet 69.
+gunHeCK bet 0.
+Lurker bet 0.
+MonisAddiction bet 69.
+
+Round 2
+PassivePanga decided to !guncheck.
+MonisAddiction decided to all in.
+HeCKuSumer decided to !guncheck.
+
+Results:
+0. KaylorrCriterion: 4560
+1. Lurker: 4560
+2. gunHeCK: 4527
+3. PassivePanga: 3939
+4. HeCKuSumer: 3036
+5. MonisAddiction: 240
+
+
+#####GAME 9: 156 players######
+
+Round 1:
+MonisAddiction bet 69.
+Lurker bet 0.
+KaylorrCriterion bet 70.
+gunHeCK bet 70.
+PassivePanga bet 69.
+HeCKuSumer bet 303.
+
+Round 2
+HeCKuSumer decided to !guncheck.
+gunHeCK decided to !gunHeCK.
+PassivePanga decided to !guncheck.
+KaylorrCriterion decided to !guncheck.
+MonisAddiction decided to all in.
+
+Results:
+0. Lurker: 5040
+1. KaylorrCriterion: 4970
+2. gunHeCK: 4937
+3. PassivePanga: 4350
+4. HeCKuSumer: 3213
+5. MonisAddiction: 1032
+
+
+#####GAME 10: 251 players######
+
+Round 1:
+HeCKuSumer bet 321.
+KaylorrCriterion bet 0.
+Lurker bet 0.
+gunHeCK bet 0.
+MonisAddiction bet 1.
+PassivePanga bet 69.
+
+Round 2
+PassivePanga decided to !guncheck.
+MonisAddiction decided to all in.
+HeCKuSumer decided to !guncheck.
+
+Results:
+0. Lurker: 5520
+1. KaylorrCriterion: 5450
+2. gunHeCK: 5417
+3. PassivePanga: 4761
+4. HeCKuSumer: 3372
+5. MonisAddiction: 240
+
+
