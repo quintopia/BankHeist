@@ -1,18 +1,14 @@
 import sys
 import ast
-def get_bank(bettors,credits):
-    selector = bettors+int(credits/100000.)
-    if selector>80:
-        return (.324,1.95)
-    if selector>60:
-        return (.387,1.65)
-    if selector>40:
-        return (.425,1.3)
-    if selector>20:
-        return (.488,1.1)
-    return (.54,.8)
+game,round,numplayers,alreadyplayed,numbet,yattasbet,numready,bankid,myyattas,mybet,mypayment,hired,myrank,mu_yattas,sigma_yattas,max_yattas = map(ast.literal_eval,sys.argv[1:17])
+bankholdings = map(int,sys.argv[17:22])
+bankprobs = map(float,sys.argv[22:27])
+bankodds = map(float,sys.argv[27:32])
 
-game,round,numplayers,alreadyplayed,numbet,yattasbet,numready,bankid,p,b,myyattas,mybet,mypayment,bank0,bank1,bank2,bank3,bank4,myrank,mu_yattas,sigma_yattas,max_yattas = map(ast.literal_eval,sys.argv[1:])
+def get_bank(bettors,credits):
+    selector = min(4,int(bettors+int(credits/100000.)/20))
+    return bankprobs[selector],bankodds[selector]
+
 
 if round == 1:
     if alreadyplayed < 0.37*numplayers or numbet==0:

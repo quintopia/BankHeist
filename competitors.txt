@@ -4,3 +4,6 @@ MonisAddiction python monisaddiction.py
 Lurker python Lurker.py
 HeCKuSumer python heckusumer.py
 gunHeCK python gunHeCK.py
+HardHatUmar python HardHatUmar.py
+LimeadeSneaktar python limeadesneaktar.py
+OC'sRandomTpyos python ocsrandomtpyos.py
