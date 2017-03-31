@@ -10,6 +10,7 @@ def get_bank(bettors,credits):
     return bankprobs[selector],bankodds[selector]
 
 
+
 if round == 1:
     if alreadyplayed < 0.37*numplayers or numbet==0:
         print 0
@@ -27,6 +28,7 @@ else:
     if alreadyplayed < 0.37*numbet or numbet==0:
         print "!guncheck"
     else:
+        p,b = get_bank(numbet,yattasbet)
         realp = p*numready/float(alreadyplayed)
         f = (realp*(b+1)-(1-240./(myyattas+240.)))/b
         print "!guncheck" if f>0 else "back out"

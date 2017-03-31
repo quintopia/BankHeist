@@ -8,8 +8,8 @@ bankprobs = map(float,sys.argv[22:27])
 bankodds = map(float,sys.argv[27:32])
 
 if round == 1:
-    if game<800:
-        print 69
+    if game<800 or myrank>3:
+        print 1
     else:
         print myyattas/4
 else:
@@ -19,7 +19,7 @@ else:
         else:
             print random.choice(["acquire intel","buy guard"])
     else:
-        if myrank>1:
+        if myrank>3:
             print "all in"
         else:
             print "!guncheck"

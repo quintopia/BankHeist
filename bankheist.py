@@ -35,7 +35,10 @@ def get_bank(bettors,credits):
 def rabblebot(game,round,numplayers,alreadyplayed,numbet,yattasbet,numready,bankid,myyattas,mybet,mypayment,hired,rank,mu_yattas,sigma_yattas,max_yattas,bank_holdings,bankprobs,bankodds,errors):
     p = bankprobs[bankid]
     if round==2:
-        return "!guncheck"
+        if alreadyplayed and random.random()<0.55-0.5*numready/alreadyplayed:
+            return "back out"
+        else:
+            return "!guncheck"
     if random.random()>p:
         return 0
     else:
@@ -67,21 +70,29 @@ class Bot:
         self.bankprobs = [0.54,0.488,0.425,0.387,0.324]
         self.bankodds = [0.8,1.1,1.3,1.65,1.95]
         self.fingered = False
+        self.fingersuccess = False
         self.winnings = 0
         self.guardbribes = []
     
-    def do_payment(self,bonus):
-        if "double cross" and bonus>0 and self.fingered:
-            self.hired = False
+    def do_payment(self,dcsuccess,dcwinnings,straightwinnings):
+        if self.decision == "double cross" and (not dcsuccess or self.fingered):
             self.payment/=2
+            self.hired = False
             self.winnings = 0
-            self.bonus = 0
         if not self.hired and random.randint(1,20)==20:
             self.payment+=int(self.payment/10)
             self.hired = True
         if self.decision not in ["back out","all in"] and self.hired:
             self.yattas += self.payment
-        self.yattas += self.winnings + bonus - len(self.guardbribes)
+        if self.decision == "double cross" and dcsuccess and not self.fingered:
+            self.yattas += self.winnings + dcwinnings
+        elif self.decision == "finger" and not dcsuccess and self.fingersuccess:
+            self.yattas += self.winnings/2
+        elif not dcsuccess:
+            self.yattas += self.winnings
+        if self.decision not in ["back out","all in","double cross"] and not dcsuccess and (self.fingersuccess or not self.decision == "finger"):
+            self.yattas += straightwinnings
+        self.yattas -= len(self.guardbribes)
         if self.yattas < 0:
             random.shuffle(self.guardbribes)
             for i in range(-self.yattas):
@@ -91,12 +102,13 @@ class Bot:
         self.winnings = 0
         self.bet = 0 #just to be sure :D
         self.fingered = False
+        self.fingersuccess = False
+        self.decision = "stick"
         
     def update(self,bankid,p,dcsuccess,heisters):
         basep = self.bankprobs[bankid]
         p = p*basep
         b = self.bankodds[bankid]
-        dcreturnval = 0
         if self.decision == "all in":
                 if random.random()<basep:
                     self.yattas = int(b*(self.yattas+240))
@@ -115,40 +127,31 @@ class Bot:
                 elif self.decision == "withdraw":
                     self.winnings += self.bankholdings[bankid]
                     self.bankholdings[bankid] = 0
-                if dcsuccess and self.decision != "double cross":
-                    dcreturnval = self.winnings
-                    self.winnings = 0
-                if not dcsuccess and self.decision == "double cross":
-                    dcreturnval = self.winnings
-                    self.winnings = 0
-                    self.payment/=2
-                    self.hired = False
                 if self.decision == "finger":
-                    success = False
                     for i in range(10):
                         test = random.choice(heisters)
-                        if test.choice == "double cross" and not test.fingered:
-                            success = True
+                        if test.decision == "double cross" and not test.fingered:
                             test.fingered = True
+                            self.fingersuccess = True
                             pmt = test.yattas/4
                             test.yattas-=pmt
                             test.bankprobs[bankid]-=0.05
                             self.yattas+=pmt
-                    if not success:
-                        dcreturnval = self.winnings/2
-                        self.winnings /= 2
+                    if not self.fingersuccess:
                         self.bankodds[bankid]-=0.05
-        if self.decision == "buy guard":
-            self.guardbribes.append(bankid)
-            self.bankprobs[bankid] += .01*(1-self.bankprobs[bankid])
-        if self.decision == "change jobs":
-            self.hired = False
-
-        else:
-            self.decision = "stick"
+            if self.decision == "buy guard":
+                self.guardbribes.append(bankid)
+                self.bankprobs[bankid] += .01*(1-self.bankprobs[bankid])
+            if self.decision == "change jobs":
+                self.hired = False
         for i in range(5):
             self.bankholdings[i] += int(0.0014*self.bankholdings[i])
-        return dcreturnval
+        if self.decision=="finger" and not self.fingersuccess:
+            return self.winnings/2
+        elif (dcsuccess and (self.decision not in ["all in","back out"] or self.fingered)) or (self.decision=="double cross" and (not dcsuccess or self.fingered)):
+            return self.winnings
+        else:
+            return 0
     
     def decide(self,game,round,numplayers,alreadyplayed,numbet,yattasbet,numready,bankid,mu_yattas,sigma_yattas,max_yattas,errors):
         p = self.bankprobs[bankid]
@@ -219,6 +222,7 @@ def rungame(players,rounds,logfile,errors,verbose=True):
         stickers = 0
         realstickers = []
         backstabbers = []
+        numstraight = 0
         for i,player in enumerate(bettors):
             #game,round,numplayers,alreadyplayed,numbet,yattasbet,numready,bankid,mu_yattas,sigma_yattas,max_yattas,errors
             player.decide(game,2,len(bettors),i,len(bettors),investment,stickers,bankid,mu_yattas,sigma_yattas,max_yattas,errors)
@@ -228,8 +232,10 @@ def rungame(players,rounds,logfile,errors,verbose=True):
                 stickers += 1
                 if player.name != "rabble":
                     realstickers.append(player)
-            if player.decision == "double cross":
-                backstabbers.append(player)
+                if player.decision == "double cross":
+                    backstabbers.append(player)
+                elif player.decision!="all in":
+                    numstraight += 1
             if player.name != "rabble":
                 logfile.write("%s decided to %s.\n"%(player.name,player.decision))
         #compute results
@@ -237,18 +243,16 @@ def rungame(players,rounds,logfile,errors,verbose=True):
             p = stickers/len(bettors)
         else:
             p=0
-        dcsuccess = len(backstabbers)==1 or len(backstabbers) <= len(realstickers)/10
-        dcjackpot = 0
+        dcsuccess = len(backstabbers)==1 or 0 < len(backstabbers) <= len(realstickers)/10
+        pot = 0
         for player in players:
-            dcjackpot += player.update(bankid,p,dcsuccess,realstickers)
+            pot+=player.update(bankid,p,dcsuccess,realstickers)
         successfulbackstabbers = filter(lambda p:not p.fingered,backstabbers)
+        dcwinnings = 0
+        if dcsuccess:dcwinnings = len(successfulbackstabbers)*pot/len(backstabbers)
+        straightwinnings = (len(backstabbers)-len(successfulbackstabbers))*pot/numstraight
         for player in players:
-            if dcsuccess:
-                bonus = dcjackpot/max(1,len(successfulbackstabbers))
-                player.do_payment(bonus if player in successfulbackstabbers else 0)
-            else:
-                bonus = dcjackpot/max(1,len(players)-len(backstabbers))
-                player.do_payment(bonus if player not in backstabbers else 0)
+            player.do_payment(dcsuccess,dcwinnings,straightwinnings)
         realplayers.sort(key=lambda p: -p.yattas)
         logfile.write("\nResults:\n")
         for i,player in enumerate(realplayers):

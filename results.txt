@@ -1,11 +1,12 @@
 Program Name        Final Score
 ----------------  -------------
-LimeadeSneaktar        61561358
-HardHatUmar             1052888
-Lurker                   257760
-PassivePanga             183723
-KaylorrCriterion         103443
-gunHeCK                  100849
-HeCKuSumer                 2400
+HardHatUmar             4443659
+SnitcherKing             706387
+Lurker                   255600
+gunHeCK                  255600
+KaylorrCriterion         252401
+PassivePanga             182432
+LimeadeSneaktar           84541
+OC'sRandomTpyos           18980
+HeCKuSumer                 2409
 MonisAddiction              240
-OC'sRandomTpyos            -613

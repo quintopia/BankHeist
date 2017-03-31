@@ -5,7 +5,7 @@ round = int(sys.argv[2])
 hired = int(sys.argv[12])
 
 if round==1:
-    if game < 800 and hired:
+    if game < 900 and hired:
         print 1
     else:
         print 0

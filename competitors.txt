@@ -7,3 +7,4 @@ gunHeCK python gunHeCK.py
 HardHatUmar python HardHatUmar.py
 LimeadeSneaktar python limeadesneaktar.py
 OC'sRandomTpyos python ocsrandomtpyos.py
+SnitcherKing python snitcherking.py
