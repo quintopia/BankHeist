@@ -74,24 +74,25 @@ class Bot:
         self.winnings = 0
         self.guardbribes = []
     
-    def do_payment(self,dcsuccess,dcwinnings,straightwinnings):
+    def do_payment(self,dcsuccess,dcwinnings,straightwinnings,numbackstabbers):
         if self.decision == "double cross" and (not dcsuccess or self.fingered):
             self.payment/=2
             self.hired = False
             self.winnings = 0
         if not self.hired and random.randint(1,20)==20:
-            self.payment+=int(self.payment/10)
+            self.payment+=int(self.payment/20)
             self.hired = True
         if self.decision not in ["back out","all in"] and self.hired:
             self.yattas += self.payment
         if self.decision == "double cross" and dcsuccess and not self.fingered:
-            self.yattas += self.winnings + dcwinnings
+            self.yattas += self.winnings + dcwinnings/numbackstabbers
+            #print self.name + " won an extra " + str(dcwinnings/numbackstabbers) + " for double-crossing"
         elif self.decision == "finger" and not dcsuccess and self.fingersuccess:
             self.yattas += self.winnings/2
         elif not dcsuccess:
             self.yattas += self.winnings
-        if self.decision not in ["back out","all in","double cross"] and not dcsuccess and (self.fingersuccess or not self.decision == "finger"):
-            self.yattas += straightwinnings
+        if self.decision not in ["back out","all in","double cross"] and (self.fingersuccess or not self.decision == "finger") and straightwinnings:
+            self.yattas += int(self.winnings*straightwinnings/(dcwinnings+straightwinnings))
         self.yattas -= len(self.guardbribes)
         if self.yattas < 0:
             random.shuffle(self.guardbribes)
@@ -128,24 +129,25 @@ class Bot:
                     self.winnings += self.bankholdings[bankid]
                     self.bankholdings[bankid] = 0
                 if self.decision == "finger":
-                    for i in range(10):
+                    for i in range(8):
                         test = random.choice(heisters)
                         if test.decision == "double cross" and not test.fingered:
                             test.fingered = True
                             self.fingersuccess = True
-                            pmt = test.yattas/4
+                            pmt = test.yattas/6
                             test.yattas-=pmt
                             test.bankprobs[bankid]-=0.05
                             self.yattas+=pmt
                     if not self.fingersuccess:
                         self.bankodds[bankid]-=0.05
+                        self.payment -= int(.05*self.payment)
             if self.decision == "buy guard":
                 self.guardbribes.append(bankid)
                 self.bankprobs[bankid] += .01*(1-self.bankprobs[bankid])
             if self.decision == "change jobs":
                 self.hired = False
         for i in range(5):
-            self.bankholdings[i] += int(0.0014*self.bankholdings[i])
+            self.bankholdings[i] += int(0.014*self.bankholdings[i])
         if self.decision=="finger" and not self.fingersuccess:
             return self.winnings/2
         elif (dcsuccess and (self.decision not in ["all in","back out"] or self.fingered)) or (self.decision=="double cross" and (not dcsuccess or self.fingered)):
@@ -178,7 +180,8 @@ def rungame(players,rounds,logfile,errors,verbose=True):
     for i in range(500):
         rabble.append(Bot("rabble",rabblebot))
     for game in range(rounds):
-        print_progress(game,rounds)
+        if verbose:
+            print_progress(game,rounds)
         #compute distribution stats
         #compute ranks
         prev = realplayers[0]
@@ -250,9 +253,9 @@ def rungame(players,rounds,logfile,errors,verbose=True):
         successfulbackstabbers = filter(lambda p:not p.fingered,backstabbers)
         dcwinnings = 0
         if dcsuccess:dcwinnings = len(successfulbackstabbers)*pot/len(backstabbers)
-        straightwinnings = (len(backstabbers)-len(successfulbackstabbers))*pot/numstraight
+        straightwinnings = pot - dcwinnings
         for player in players:
-            player.do_payment(dcsuccess,dcwinnings,straightwinnings)
+            player.do_payment(dcsuccess,dcwinnings,straightwinnings,len(successfulbackstabbers))
         realplayers.sort(key=lambda p: -p.yattas)
         logfile.write("\nResults:\n")
         for i,player in enumerate(realplayers):
@@ -263,9 +266,13 @@ def rungame(players,rounds,logfile,errors,verbose=True):
                 
 if __name__=="__main__":
     players = []
+    if len(sys.argv)<2:
+        print "how many rounds?"
+        sys.exit(0)
     rounds = int(sys.argv[1])
     with open("competitors.txt") as f:
         for line in f:
+            if line.startswith("#"): continue
             parts = line.split(" ")
             name = parts[0]
             command = " ".join(parts[1:]).strip()

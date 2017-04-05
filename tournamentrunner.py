@@ -7,6 +7,7 @@ players = []
 rounds = 1000
 with open("competitors.txt") as f:
     for line in f:
+        if line.startswith("#"): continue
         parts = line.split(" ")
         name = parts[0]
         command = " ".join(parts[1:]).strip()
