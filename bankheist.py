@@ -96,7 +96,7 @@ class Bot:
         self.yattas -= len(self.guardbribes)
         if self.yattas < 0:
             random.shuffle(self.guardbribes)
-            for i in range(-self.yattas):
+            for i in range(min(len(self.guardbribes),-self.yattas)):
                 bankid = self.guardbribes.pop()
                 self.bankprobs[bankid] = (self.bankprobs[bankid]-0.01)/0.99
             self.yattas=0
